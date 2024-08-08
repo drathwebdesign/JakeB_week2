@@ -35,6 +35,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ReverseCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a2a73de-1a52-4b9a-9abf-83088e7f603d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cce07e72-6ff0-4505-b1f3-366a2f77398d"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReverseCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,6 +121,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Vehicle
         m_Vehicle = asset.FindActionMap("Vehicle", throwIfNotFound: true);
         m_Vehicle_Move = m_Vehicle.FindAction("Move", throwIfNotFound: true);
+        m_Vehicle_ReverseCamera = m_Vehicle.FindAction("ReverseCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -163,11 +184,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Vehicle;
     private List<IVehicleActions> m_VehicleActionsCallbackInterfaces = new List<IVehicleActions>();
     private readonly InputAction m_Vehicle_Move;
+    private readonly InputAction m_Vehicle_ReverseCamera;
     public struct VehicleActions
     {
         private @PlayerControls m_Wrapper;
         public VehicleActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Vehicle_Move;
+        public InputAction @ReverseCamera => m_Wrapper.m_Vehicle_ReverseCamera;
         public InputActionMap Get() { return m_Wrapper.m_Vehicle; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -180,6 +203,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @ReverseCamera.started += instance.OnReverseCamera;
+            @ReverseCamera.performed += instance.OnReverseCamera;
+            @ReverseCamera.canceled += instance.OnReverseCamera;
         }
 
         private void UnregisterCallbacks(IVehicleActions instance)
@@ -187,6 +213,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @ReverseCamera.started -= instance.OnReverseCamera;
+            @ReverseCamera.performed -= instance.OnReverseCamera;
+            @ReverseCamera.canceled -= instance.OnReverseCamera;
         }
 
         public void RemoveCallbacks(IVehicleActions instance)
@@ -207,5 +236,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IVehicleActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnReverseCamera(InputAction.CallbackContext context);
     }
 }

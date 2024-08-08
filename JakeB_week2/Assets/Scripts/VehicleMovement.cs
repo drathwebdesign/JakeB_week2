@@ -12,6 +12,9 @@ public class VehicleMovement : MonoBehaviour {
     public WheelCollider[] wheelColliders;
     public Transform[] wheelMeshes;
 
+    // Reverse for camera
+    private Vector2 inputVector;
+
     private void Awake() {
         playerControls = new PlayerControls();
         playerControls.Vehicle.Enable();
@@ -27,7 +30,8 @@ public class VehicleMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        Vector2 inputVector = GetMovementVectorNormalized();
+        // Update the existing inputVector field
+        inputVector = GetMovementVectorNormalized();
 
         // Calculate forward force
         float motorTorque = inputVector.y * accelerationForce;
@@ -49,6 +53,11 @@ public class VehicleMovement : MonoBehaviour {
     public Vector2 GetMovementVectorNormalized() {
         Vector2 inputVector = playerControls.Vehicle.Move.ReadValue<Vector2>();
         return inputVector.normalized;
+    }
+
+    //Camera Reverse bool
+    public bool IsReversing() {
+        return inputVector.y < 0;
     }
 
     private void UpdateWheelMeshes() {

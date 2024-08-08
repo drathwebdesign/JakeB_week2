@@ -10,6 +10,7 @@ TagManager:
   - AutoService
   - GasStation
   - Hooker
+  - Zombie
   layers:
   - Default
   - TransparentFX
