@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class VehicleMovement : MonoBehaviour {
+public class VehicleMovement2 : MonoBehaviour {
     private PlayerControls playerControls;
     private Rigidbody rb;
 
@@ -17,16 +17,16 @@ public class VehicleMovement : MonoBehaviour {
 
     private void Awake() {
         playerControls = new PlayerControls();
-        playerControls.Vehicle.Enable();
+        playerControls.Vehicle2.Enable();
         rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable() {
-        playerControls.Vehicle.Enable();
+        playerControls.Vehicle2.Enable();
     }
 
     private void OnDisable() {
-        playerControls.Vehicle.Disable();
+        playerControls.Vehicle2.Disable();
     }
 
     private void FixedUpdate() {
@@ -51,7 +51,7 @@ public class VehicleMovement : MonoBehaviour {
     }
 
     public Vector2 GetMovementVectorNormalized() {
-        Vector2 inputVector = playerControls.Vehicle.Move.ReadValue<Vector2>();
+        Vector2 inputVector = playerControls.Vehicle2.Move.ReadValue<Vector2>();
         return inputVector.normalized;
     }
 

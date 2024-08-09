@@ -114,6 +114,98 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Vehicle2"",
+            ""id"": ""927842bf-cf53-4f0d-8e9c-97a2b7b50780"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""1e714488-af03-419a-9f3a-2c0decce0986"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""ReverseCamera"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b8db59f-5607-4eb8-939a-9e7c3b8f87c3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""308496cd-d0cc-432f-ab92-5ac2a0f2dd23"",
+                    ""path"": ""<Keyboard>/numpad0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReverseCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""bb320c1b-9d05-413f-8811-d8700cf63ea6"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""0da4824a-696b-4895-9c8b-86d8fde6bcfd"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""b3bdb9ea-2a54-4f7d-9671-93531d440277"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""488fca32-44c6-42ad-8da1-158baa2c3f8f"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4be42f90-81da-496c-9aa1-4a83b1dd49bf"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -122,6 +214,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Vehicle = asset.FindActionMap("Vehicle", throwIfNotFound: true);
         m_Vehicle_Move = m_Vehicle.FindAction("Move", throwIfNotFound: true);
         m_Vehicle_ReverseCamera = m_Vehicle.FindAction("ReverseCamera", throwIfNotFound: true);
+        // Vehicle2
+        m_Vehicle2 = asset.FindActionMap("Vehicle2", throwIfNotFound: true);
+        m_Vehicle2_Move = m_Vehicle2.FindAction("Move", throwIfNotFound: true);
+        m_Vehicle2_ReverseCamera = m_Vehicle2.FindAction("ReverseCamera", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -233,7 +329,66 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         }
     }
     public VehicleActions @Vehicle => new VehicleActions(this);
+
+    // Vehicle2
+    private readonly InputActionMap m_Vehicle2;
+    private List<IVehicle2Actions> m_Vehicle2ActionsCallbackInterfaces = new List<IVehicle2Actions>();
+    private readonly InputAction m_Vehicle2_Move;
+    private readonly InputAction m_Vehicle2_ReverseCamera;
+    public struct Vehicle2Actions
+    {
+        private @PlayerControls m_Wrapper;
+        public Vehicle2Actions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Vehicle2_Move;
+        public InputAction @ReverseCamera => m_Wrapper.m_Vehicle2_ReverseCamera;
+        public InputActionMap Get() { return m_Wrapper.m_Vehicle2; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(Vehicle2Actions set) { return set.Get(); }
+        public void AddCallbacks(IVehicle2Actions instance)
+        {
+            if (instance == null || m_Wrapper.m_Vehicle2ActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_Vehicle2ActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+            @ReverseCamera.started += instance.OnReverseCamera;
+            @ReverseCamera.performed += instance.OnReverseCamera;
+            @ReverseCamera.canceled += instance.OnReverseCamera;
+        }
+
+        private void UnregisterCallbacks(IVehicle2Actions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+            @ReverseCamera.started -= instance.OnReverseCamera;
+            @ReverseCamera.performed -= instance.OnReverseCamera;
+            @ReverseCamera.canceled -= instance.OnReverseCamera;
+        }
+
+        public void RemoveCallbacks(IVehicle2Actions instance)
+        {
+            if (m_Wrapper.m_Vehicle2ActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IVehicle2Actions instance)
+        {
+            foreach (var item in m_Wrapper.m_Vehicle2ActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_Vehicle2ActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public Vehicle2Actions @Vehicle2 => new Vehicle2Actions(this);
     public interface IVehicleActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnReverseCamera(InputAction.CallbackContext context);
+    }
+    public interface IVehicle2Actions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnReverseCamera(InputAction.CallbackContext context);
