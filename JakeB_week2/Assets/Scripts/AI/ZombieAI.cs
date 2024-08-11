@@ -11,7 +11,7 @@ public class ZombieAI : MonoBehaviour {
     // Walking/running/changing direction
     [SerializeField] float walkSpeed = 1.5f;
     [SerializeField] float runSpeed = 4f;
-    [SerializeField] float directionChangeInterval = 5f; // Time interval for changing direction
+    [SerializeField] float directionChangeInterval = 8f; // Time interval for changing direction
     [SerializeField] float detectionRange = 15f; // Range within which the zombie detects the target
     [SerializeField] float rotationSpeed = 25f; // Speed at which the zombie turns
 
@@ -131,15 +131,6 @@ public class ZombieAI : MonoBehaviour {
     }
 
     private void OnCollisionEnter(Collision collision) {
-        // Check if the collided object is a lamppost
-        if (collision.gameObject.CompareTag("Knockable")) {
-            // Prevent the zombie from affecting the lamppost
-            Rigidbody knockableRb = collision.rigidbody;
-            if (knockableRb != null) {
-                knockableRb.isKinematic = true; // Make the lamppost kinematic
-                StartCoroutine(ResetKinematic(knockableRb)); // Reset after a short delay
-            }
-        }
         //XYZ
         if (collision.gameObject.CompareTag("Player")) {
             UnlockRotationConstraints();
@@ -161,11 +152,6 @@ public class ZombieAI : MonoBehaviour {
 
     private void UnlockRotationConstraints() {
         rb.constraints = RigidbodyConstraints.None;
-    }
-
-    private System.Collections.IEnumerator ResetKinematic(Rigidbody rb) {
-        yield return new WaitForSeconds(0.1f); // Short delay before resetting
-        rb.isKinematic = false; // Restore the lamppost's non-kinematic state
     }
     private IEnumerator ReapplyRotationConstraintsAfterDelay(float delay) {
         yield return new WaitForSeconds(delay);
@@ -213,7 +199,7 @@ public class ZombieAI : MonoBehaviour {
         RaycastHit hit;
         isGrounded = Physics.Raycast(transform.position, Vector3.down, out hit, groundCheckDistance, groundLayer);
 
-        // Optional: Draw a debug line to visualize the ground check
+        //Draw a debug line to visualize the ground check
         Debug.DrawLine(transform.position, transform.position + Vector3.down * groundCheckDistance, Color.green);
     }
 

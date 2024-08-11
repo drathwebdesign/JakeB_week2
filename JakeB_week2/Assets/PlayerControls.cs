@@ -209,6 +209,42 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""Unstuck"",
+                    ""type"": ""Button"",
+                    ""id"": ""5473ed8f-c602-45f6-904c-8e5220850ee7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Nitros"",
+                    ""type"": ""Button"",
+                    ""id"": ""8098a4af-d54f-4f67-9531-cacb9700b550"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Handbrake"",
+                    ""type"": ""Button"",
+                    ""id"": ""49dea148-d08f-42b1-9d28-91163a38553b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Horn"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbe712d6-dfaf-4e07-bc74-fc5ff79dc661"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""ReverseCamera"",
                     ""type"": ""Button"",
                     ""id"": ""2b8db59f-5607-4eb8-939a-9e7c3b8f87c3"",
@@ -284,6 +320,50 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""23456b17-4a5f-45a9-b8b2-3dfba6a39a38"",
+                    ""path"": ""<Keyboard>/numpad8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Horn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c56543c4-ce02-4763-9399-4946bb36b2d5"",
+                    ""path"": ""<Keyboard>/numpad4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Handbrake"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fe87f42-ee61-456a-a72e-30ce7d14d747"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Nitros"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7e616f49-82c7-4941-a439-dbdd69b5c776"",
+                    ""path"": ""<Keyboard>/numpad6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Unstuck"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -301,6 +381,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // Vehicle2
         m_Vehicle2 = asset.FindActionMap("Vehicle2", throwIfNotFound: true);
         m_Vehicle2_Move = m_Vehicle2.FindAction("Move", throwIfNotFound: true);
+        m_Vehicle2_Unstuck = m_Vehicle2.FindAction("Unstuck", throwIfNotFound: true);
+        m_Vehicle2_Nitros = m_Vehicle2.FindAction("Nitros", throwIfNotFound: true);
+        m_Vehicle2_Handbrake = m_Vehicle2.FindAction("Handbrake", throwIfNotFound: true);
+        m_Vehicle2_Horn = m_Vehicle2.FindAction("Horn", throwIfNotFound: true);
         m_Vehicle2_ReverseCamera = m_Vehicle2.FindAction("ReverseCamera", throwIfNotFound: true);
     }
 
@@ -450,12 +534,20 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Vehicle2;
     private List<IVehicle2Actions> m_Vehicle2ActionsCallbackInterfaces = new List<IVehicle2Actions>();
     private readonly InputAction m_Vehicle2_Move;
+    private readonly InputAction m_Vehicle2_Unstuck;
+    private readonly InputAction m_Vehicle2_Nitros;
+    private readonly InputAction m_Vehicle2_Handbrake;
+    private readonly InputAction m_Vehicle2_Horn;
     private readonly InputAction m_Vehicle2_ReverseCamera;
     public struct Vehicle2Actions
     {
         private @PlayerControls m_Wrapper;
         public Vehicle2Actions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Vehicle2_Move;
+        public InputAction @Unstuck => m_Wrapper.m_Vehicle2_Unstuck;
+        public InputAction @Nitros => m_Wrapper.m_Vehicle2_Nitros;
+        public InputAction @Handbrake => m_Wrapper.m_Vehicle2_Handbrake;
+        public InputAction @Horn => m_Wrapper.m_Vehicle2_Horn;
         public InputAction @ReverseCamera => m_Wrapper.m_Vehicle2_ReverseCamera;
         public InputActionMap Get() { return m_Wrapper.m_Vehicle2; }
         public void Enable() { Get().Enable(); }
@@ -469,6 +561,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @Unstuck.started += instance.OnUnstuck;
+            @Unstuck.performed += instance.OnUnstuck;
+            @Unstuck.canceled += instance.OnUnstuck;
+            @Nitros.started += instance.OnNitros;
+            @Nitros.performed += instance.OnNitros;
+            @Nitros.canceled += instance.OnNitros;
+            @Handbrake.started += instance.OnHandbrake;
+            @Handbrake.performed += instance.OnHandbrake;
+            @Handbrake.canceled += instance.OnHandbrake;
+            @Horn.started += instance.OnHorn;
+            @Horn.performed += instance.OnHorn;
+            @Horn.canceled += instance.OnHorn;
             @ReverseCamera.started += instance.OnReverseCamera;
             @ReverseCamera.performed += instance.OnReverseCamera;
             @ReverseCamera.canceled += instance.OnReverseCamera;
@@ -479,6 +583,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @Unstuck.started -= instance.OnUnstuck;
+            @Unstuck.performed -= instance.OnUnstuck;
+            @Unstuck.canceled -= instance.OnUnstuck;
+            @Nitros.started -= instance.OnNitros;
+            @Nitros.performed -= instance.OnNitros;
+            @Nitros.canceled -= instance.OnNitros;
+            @Handbrake.started -= instance.OnHandbrake;
+            @Handbrake.performed -= instance.OnHandbrake;
+            @Handbrake.canceled -= instance.OnHandbrake;
+            @Horn.started -= instance.OnHorn;
+            @Horn.performed -= instance.OnHorn;
+            @Horn.canceled -= instance.OnHorn;
             @ReverseCamera.started -= instance.OnReverseCamera;
             @ReverseCamera.performed -= instance.OnReverseCamera;
             @ReverseCamera.canceled -= instance.OnReverseCamera;
@@ -511,6 +627,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IVehicle2Actions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnUnstuck(InputAction.CallbackContext context);
+        void OnNitros(InputAction.CallbackContext context);
+        void OnHandbrake(InputAction.CallbackContext context);
+        void OnHorn(InputAction.CallbackContext context);
         void OnReverseCamera(InputAction.CallbackContext context);
     }
 }

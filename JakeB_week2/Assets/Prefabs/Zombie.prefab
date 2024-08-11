@@ -215,10 +215,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100166, guid: f88c8301226fd194cbbc64e25b20d567,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4024086373784325040}
-    - targetCorrespondingSourceObject: {fileID: 100166, guid: f88c8301226fd194cbbc64e25b20d567,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6034351399947661720}
     - targetCorrespondingSourceObject: {fileID: 100166, guid: f88c8301226fd194cbbc64e25b20d567,
         type: 3}
@@ -313,7 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 1.5
   runSpeed: 4
-  directionChangeInterval: 5
+  directionChangeInterval: 8
   detectionRange: 15
   rotationSpeed: 25
   fieldOfViewAngle: 60
@@ -337,22 +333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 121e5cfff068c044681a68841de62716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4024086373784325040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4944311749264727898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c498443fb1b70b0438f662f3bac5b8e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recoveryForce: 5
-  zRecoveryTorque: 50
-  recoveryAngle: 45
-  maxFallingSpeed: 2
 --- !u!114 &6034351399947661720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,6 +360,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e66b136e063cc4049b96679b13228187, type: 3}
   - {fileID: 8300000, guid: e29d35a3561cf964e9c39f5b99c2696c, type: 3}
   - {fileID: 8300000, guid: 83041cb4dc7766b48a4342db7511819d, type: 3}
+  soundDistanceThreshold: 10
 --- !u!82 &8391682907945408217
 AudioSource:
   m_ObjectHideFlags: 0
@@ -391,7 +372,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.05
   m_Pitch: 1
   Loop: 0

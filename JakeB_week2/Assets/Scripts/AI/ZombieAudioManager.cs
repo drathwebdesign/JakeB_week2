@@ -1,33 +1,60 @@
 using UnityEngine;
+using System.Collections;
 
 public class ZombieAudioManager : MonoBehaviour {
     public AudioClip[] zombieSounds;  // Array of zombie audio clips
+    public float soundDistanceThreshold = 10f;  // Distance threshold for playing sound
     private AudioSource audioSource;
+    private Transform playerTransform;  // Reference to the player's transform
 
     void Start() {
         audioSource = GetComponent<AudioSource>();
 
         if (audioSource == null) {
-            Debug.LogError("AudioSource component missing from this GameObject!", gameObject);
             return;
         }
 
         if (zombieSounds == null || zombieSounds.Length == 0) {
-            Debug.LogWarning("No audio clips assigned to ZombieAudioManager.", gameObject);
             return;
         }
 
-        PlayRandomZombieSound();  // Play sound at start for testing
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
+        if (playerTransform == null) {
+            return;
+        }
+
+        // Start the coroutine to continuously play zombie sounds
+        StartCoroutine(PlayZombieSoundsLoop());
+    }
+
+    private IEnumerator PlayZombieSoundsLoop() {
+        while (true) {
+            PlayRandomZombieSound();
+
+            // Ensure there is a valid clip before waiting
+            if (audioSource.clip != null) {
+                yield return new WaitForSeconds(audioSource.clip.length);
+            } else {
+                // If no clip is available, wait for a short time before retrying
+                yield return new WaitForSeconds(1f);
+            }
+        }
     }
 
     public void PlayRandomZombieSound() {
-        if (zombieSounds.Length == 0 || audioSource == null) return;
+        if (zombieSounds.Length == 0 || audioSource == null || playerTransform == null) return;
 
-        int randomIndex = Random.Range(0, zombieSounds.Length);
-        AudioClip randomClip = zombieSounds[randomIndex];
+        // Calculate the distance to the player
+        float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        audioSource.clip = randomClip;
-        Debug.Log("Playing clip: " + randomClip.name);  // Log the clip name for debugging
-        audioSource.Play();
+        // Play sound only if within the specified distance
+        if (distanceToPlayer <= soundDistanceThreshold) {
+            int randomIndex = Random.Range(0, zombieSounds.Length);
+            AudioClip randomClip = zombieSounds[randomIndex];
+
+            audioSource.clip = randomClip;
+            audioSource.Play();
+        }
     }
 }

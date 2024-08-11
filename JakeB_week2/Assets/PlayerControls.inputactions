@@ -187,6 +187,42 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Unstuck",
+                    "type": "Button",
+                    "id": "5473ed8f-c602-45f6-904c-8e5220850ee7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Nitros",
+                    "type": "Button",
+                    "id": "8098a4af-d54f-4f67-9531-cacb9700b550",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Handbrake",
+                    "type": "Button",
+                    "id": "49dea148-d08f-42b1-9d28-91163a38553b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Horn",
+                    "type": "Button",
+                    "id": "dbe712d6-dfaf-4e07-bc74-fc5ff79dc661",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "ReverseCamera",
                     "type": "Button",
                     "id": "2b8db59f-5607-4eb8-939a-9e7c3b8f87c3",
@@ -262,6 +298,50 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "23456b17-4a5f-45a9-b8b2-3dfba6a39a38",
+                    "path": "<Keyboard>/numpad8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Horn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c56543c4-ce02-4763-9399-4946bb36b2d5",
+                    "path": "<Keyboard>/numpad4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Handbrake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2fe87f42-ee61-456a-a72e-30ce7d14d747",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Nitros",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e616f49-82c7-4941-a439-dbdd69b5c776",
+                    "path": "<Keyboard>/numpad6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Unstuck",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

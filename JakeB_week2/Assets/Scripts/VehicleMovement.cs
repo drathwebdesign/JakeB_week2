@@ -6,7 +6,7 @@ public class VehicleMovement : MonoBehaviour {
     private PlayerControls playerControls;
     private Rigidbody rb;
 
-    [SerializeField] float accelerationForce = 150f;
+    [SerializeField] float accelerationForce = 1500f;
     [SerializeField] float turnSpeed = 100f;
     [SerializeField] float maxSteerAngle = 30f;
     [SerializeField] float downforce = 100f;
