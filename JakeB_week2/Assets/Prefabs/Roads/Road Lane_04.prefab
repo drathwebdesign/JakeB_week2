@@ -45,6 +45,10 @@ PrefabInstance:
       value: Road Lane_04
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5dca1204e7e935d408728950a2ad997e, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5dca1204e7e935d408728950a2ad997e, type: 3}
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}

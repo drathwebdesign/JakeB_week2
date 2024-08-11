@@ -11,16 +11,19 @@ TagManager:
   - GasStation
   - Hooker
   - Zombie
+  - RespawnPoint
+  - Knockable
+  - HookerSpawnPoint
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Knockable
+  - Zombie
+  - Player
   - 
   - 
   - 

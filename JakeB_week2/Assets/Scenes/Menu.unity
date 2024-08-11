@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 68300185}
   - component: {fileID: 68300184}
   - component: {fileID: 68300183}
+  - component: {fileID: 68300186}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -268,6 +269,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 68300181}
   m_CullTransparentMesh: 1
+--- !u!114 &68300186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 68300181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669d290e490687e419d07fdccec6c010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 1, g: 1, b: 1, a: 0}
+  scaleFactor: 1.2
 --- !u!1 &180009073
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,6 +295,7 @@ GameObject:
   - component: {fileID: 180009077}
   - component: {fileID: 180009076}
   - component: {fileID: 180009075}
+  - component: {fileID: 180009078}
   m_Layer: 5
   m_Name: Co-OPButton
   m_TagString: Untagged
@@ -413,6 +429,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180009073}
   m_CullTransparentMesh: 1
+--- !u!114 &180009078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 180009073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669d290e490687e419d07fdccec6c010, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverColor: {r: 1, g: 1, b: 1, a: 0}
+  scaleFactor: 1.2
 --- !u!1 &203044247
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,10 +500,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: co=op mode
+  m_text: CO-OP MODE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f01e92f16147d994ca80309365fed33d, type: 2}
-  m_sharedMaterial: {fileID: 3155642916051997228, guid: f01e92f16147d994ca80309365fed33d,
+  m_fontAsset: {fileID: 11400000, guid: 48429ad5805ec7f4ba5bc05982521aad, type: 2}
+  m_sharedMaterial: {fileID: -8527123822715310268, guid: 48429ad5805ec7f4ba5bc05982521aad,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -498,8 +528,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -866,10 +896,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: single player
+  m_text: SINGLE PLAYER
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f01e92f16147d994ca80309365fed33d, type: 2}
-  m_sharedMaterial: {fileID: 3155642916051997228, guid: f01e92f16147d994ca80309365fed33d,
+  m_fontAsset: {fileID: 11400000, guid: 48429ad5805ec7f4ba5bc05982521aad, type: 2}
+  m_sharedMaterial: {fileID: -8527123822715310268, guid: 48429ad5805ec7f4ba5bc05982521aad,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -894,8 +924,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1093,14 +1123,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Zombies
+  m_text: 'ZOMBIES
 
-    And
+    AND
 
-    Hookers'
+    LADIES OF THE NIGHT'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f01e92f16147d994ca80309365fed33d, type: 2}
-  m_sharedMaterial: {fileID: 3155642916051997228, guid: f01e92f16147d994ca80309365fed33d,
+  m_fontAsset: {fileID: 11400000, guid: 48429ad5805ec7f4ba5bc05982521aad, type: 2}
+  m_sharedMaterial: {fileID: -8527123822715310268, guid: 48429ad5805ec7f4ba5bc05982521aad,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1125,8 +1155,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 28
+  m_fontSizeBase: 28
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

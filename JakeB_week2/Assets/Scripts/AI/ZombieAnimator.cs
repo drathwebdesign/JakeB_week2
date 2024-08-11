@@ -7,6 +7,8 @@ public class ZombieAnimator : MonoBehaviour
 
     private const string IS_WALKING = "IsWalking";
     private const string IS_RUNNING = "IsRunning";
+    private const string IS_ATTACKING = "IsAttacking";
+    private const string IS_DIEING = "IsDieing";
 
     private ZombieAI zombieAI;
     private Animator animator;
@@ -22,5 +24,7 @@ public class ZombieAnimator : MonoBehaviour
     {
         animator.SetBool(IS_WALKING, zombieAI.IsWalking());
         animator.SetBool(IS_RUNNING, zombieAI.IsRunning());
+        animator.SetBool(IS_ATTACKING, zombieAI.IsAttacking());
+        animator.SetBool(IS_DIEING, zombieAI.IsDieing());
     }
 }
